@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Захищений сайт</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #bf559a;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #password-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #content {
+            display: none;
+            text-align: center;
+        }
+        #message {
+            margin-top: 20px;
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-form">
+        <p>Пароль: день твого народження</p>
+        <input type="password" id="password" placeholder="Введіть пароль" />
+        <button onclick="checkPassword()">Увійти</button>
+        <p id="message">Неправильний пароль. Спробуйте ще раз.</p>
+    </div>
+
+    <div id="content">
+        <h1>Дякую, що відреагувала та зайшла на сайт!</h1>
+        <p>Не хотів писати текстом, тому попрошу тебе послухати аудіо)</p>
+        <audio controls>
+            <source src="12.m4a" type="audio/mp4">
+            Ваш браузер не підтримує відтворення аудіо.
+        </audio>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            const correctPassword = '13'; // Ваш правильний пароль
+
+            if (password === correctPassword) {
+                document.getElementById('password-form').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            } else {
+                document.getElementById('message').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
