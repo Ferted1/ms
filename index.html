@@ -10,9 +10,10 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #bf559a;
+            background-color: #f0f0f0;
             margin: 0;
             font-family: Arial, sans-serif;
+            flex-direction: column;
         }
         #password-form {
             display: flex;
@@ -28,36 +29,66 @@
             color: red;
             display: none;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div id="password-form">
-        <p>Пароль: день твого народження</p>
         <input type="password" id="password" placeholder="Введіть пароль" />
         <button onclick="checkPassword()">Увійти</button>
         <p id="message">Неправильний пароль. Спробуйте ще раз.</p>
     </div>
 
     <div id="content">
-        <h1>Дякую, що відреагувала та зайшла на сайт!</h1>
-        <p>Не хотів писати текстом, тому попрошу тебе послухати аудіо)</p>
-        <audio controls>
-            <source src="12.m4a" type="audio/mp4">
+        <h1>Вітаємо!</h1>
+        <p>Це захищений текст, який відкривається при введенні правильного паролю.</p>
+        <audio id="audio" controls>
+            <source src="your-audio-file.m4a" type="audio/mp4">
             Ваш браузер не підтримує відтворення аудіо.
         </audio>
+        <div id="image1" class="hidden">
+            <img src="image1.jpg" alt="Перше фото" width="300">
+        </div>
+        <div id="image2" class="hidden">
+            <img src="image2.jpg" alt="Друге фото" width="300">
+        </div>
+        <div id="text" class="hidden">
+            <p>Це додатковий текст, який з'являється через 30 секунд після відтворення аудіо.</p>
+        </div>
     </div>
 
     <script>
         function checkPassword() {
             const password = document.getElementById('password').value;
-            const correctPassword = '13'; // Ваш правильний пароль
+            const correctPassword = '12345'; // Ваш правильний пароль
 
             if (password === correctPassword) {
                 document.getElementById('password-form').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
+                setupAudioListeners();
             } else {
                 document.getElementById('message').style.display = 'block';
             }
+        }
+
+        function setupAudioListeners() {
+            const audio = document.getElementById('audio');
+            const image1 = document.getElementById('image1');
+            const image2 = document.getElementById('image2');
+            const text = document.getElementById('text');
+
+            audio.addEventListener('play', function() {
+                setTimeout(() => {
+                    image1.classList.remove('hidden');
+                }, 6000); // Показує перше фото через 6 секунд
+
+                setTimeout(() => {
+                    image2.classList.remove('hidden');
+                    text.classList.remove('hidden');
+                }, 30000); // Показує друге фото та текст через 30 секунд
+            });
         }
     </script>
 </body>
